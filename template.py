@@ -1,46 +1,40 @@
-# Pygame Template 1.0
-
-# Import the pygame and system modules
 import pygame
 import sys
+import config  # Import the config module
 
-# --- Constants --- #
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-FPS = 60  # Frames per second
-WHITE = (255, 255, 255)  # RGB triplet saved in a tuple
+def init_game():
+    pygame.init()
+    screen = pygame.display.set_mode((config.WINDOW_WIDTH, config.WINDOW_HEIGHT))  # Use constants from config
+    pygame.display.set_caption(TITLE)
+    return screen
 
-# --- Initialize Pygame ---
-pygame.init()
-
-# --- Screen setup --- #
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Pygame Template")
-
-# --- Clock setup --- #
-clock = pygame.time.Clock()  # Note the capital C in the word Clock!
-
-# --- Game loop --- #
-running = True
-while running:
-    # --- Listen for and handle events --- #
+def handle_events():
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:  # Type the QUIT event in UPPERCASE!
-            running = False
+        if event.type == pygame.QUIT:
+            return False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                return False
+    return True
 
-    # --- Game logic --- #
-    # (This is where you'll put your game's logic)
+def main():
 
-    # --- Draw --- #
-    screen.fill(WHITE)  # Fill screen background with white
+    screen = init_game()
+    clock = pygame.time.Clock() # Initialize the clock object
+    
+    running = True
+    while running:
+        running = handle_events()
+        screen.fill(config.WHITE)  # Use color from config
+        # Draw the initials on the screen
+        draw_initials(screen)
+        pygame.display.flip()
 
-    # (This is where you'll draw your game objects)
+        # Limit frame rate to certain number of frames per second (FPS)
+        clock.tick(config.FPS)
 
-    pygame.display.flip()  # Update the display
+    pygame.quit()
+    sys.exit()
 
-    # --- Limit frames per second (FPS) --- #
-    clock.tick(FPS)
-
-# --- Quit Pygame and exit system module --- #
-pygame.quit()
-sys.exit()
+if __name__ == "__main__":
+    main()

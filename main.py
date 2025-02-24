@@ -1,5 +1,6 @@
 import pygame
 import sys
+import colors
 import config  # Import the config module
 
 def init_game():

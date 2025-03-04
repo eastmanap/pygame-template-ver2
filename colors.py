@@ -1,3 +1,38 @@
+# color cycle function
+col1 = 0
+col2 = 0
+col3 = 255
+    
+col1_ = True
+col2_ = False
+col3_ = False
+
+if col1_:
+    col1 += 1
+    col3 -= 1
+    if col1 == 255:
+        col1_ = False
+        col2_ = True
+        
+elif col2_:
+    col2 += 1
+    col1 -= 1
+    if col2 == 255:
+        col2_ = False
+        col3_ = True
+
+elif col3_:
+    col3 += 1
+    col2 -= 1
+    if col3 == 255:
+        col3_ = False
+        col1_ = True
+
+
+
+
+
+
 # Basic Colors
 BLACK   = (0, 0, 0)
 WHITE   = (255, 255, 255)
